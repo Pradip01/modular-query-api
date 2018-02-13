@@ -1,0 +1,34 @@
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-wrap clearfix">
+            <ul class="footer-menu-wrap">
+                <li>
+                    <a class="inactiveLink" title="Contentstack" href="{{getURL('/')}}">
+                        <img alt="Contentstack-Logo" src="{{footer.footer_logo.url}}">
+                    </a>
+                </li>
+            </ul>
+
+            {% for footerNavSections in footer.footer_nav_section %}
+            <ul class="footer-menu-wrap">
+                <li><a href="https://www.contentstack.com" class="title inactiveLink">{{footerNavSections.nav_title}}</a></li>
+                <ul>
+                    {% for navigation in footerNavSections.navigation.link %}
+                    <li><a href="{{navigation.href}}">{{navigation.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </ul>
+            {% endfor %}
+
+        </div>
+        <div class="legal-wrap col-md-12">
+            <p></p><p>{{footer.copyright}}</p><p></p>
+
+            <ul class="footer-links">
+                {% for privacy in footer.privacy %}
+                <li><a href="{{privacy.href}}">{{privacy.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</footer>

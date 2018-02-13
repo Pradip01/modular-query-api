@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import Highlight from 'react-highlight';
+import promise from 'es6-promise';
+import fetch from 'isomorphic-fetch';
+import 'babel-polyfill';
+import ReactJson from 'react-json-view';
+promise.polyfill();
 export default class Test extends React.Component {
     constructor() {
         super();
@@ -38,9 +42,11 @@ export default class Test extends React.Component {
 
     render() {
         this.props.status(this.state.statusCode)
+        this.props.rawEntry(this.state.items)
+        var itemData = <ReactJson src={this.state.items} theme="tomorrow" collapsed = {true} name = {false} collapsed = {2} enableClipboard = {false} displayDataTypes ={false}  />
         return(
             <div>
-                <Highlight className='json'>{this.state.items ? JSON.stringify(this.state.items, null, 2) : null}</Highlight>
+                {this.state.items ? itemData : null}
             </div>
         )
 
