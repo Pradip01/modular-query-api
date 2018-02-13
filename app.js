@@ -6,6 +6,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
     path = require('path'),
+    const basicAuth = require('basic-auth-connect'),
     Contentstack = require('contentstack');
 
 var app = express();
@@ -14,6 +15,7 @@ var env = process.env.NODE_ENV || "dev",
     _env;
 
 try {
+ 
   // load environment based configurations
   var _path = path.join(_dirname, 'config');
   if(env === 'dev')
@@ -49,6 +51,7 @@ try {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+  app.use(basicAuth('built', 'built123'));
   app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, 'public')));
 
