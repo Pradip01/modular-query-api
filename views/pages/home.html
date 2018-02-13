@@ -1,0 +1,113 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<section>
+    <div class="cont-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-3 left-sidebar">
+                            <div class="row">
+                                <ul class="nav nav-stacked" id="s-menu">
+                                    <li><a href="#{{entry.introduction.heading | replace(' ', '-') | lower}}">{{entry.introduction.heading}}</a>
+                                        <ul>
+                                            {% for introduction in entry.introduction.order_of_sub_items %}
+                                            <li><a href="#{{introduction.title | replace(' ', '-') | lower}}">{{introduction.title}}</a>
+                                                {% if introduction.sub_items.length %}
+                                                <ul>
+                                                    {% for sub_item in introduction.sub_items %}
+                                                    <li><a href="#{{sub_item.title | replace(' ', '-') | lower }}">{{sub_item.title}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li><a href="#{{entry.reference.heading  | replace(' ', '-') | lower }}">{{entry.reference.heading}}</a>
+                                        <ul>
+                                            {% for reference in entry.reference.order_of_sub_items %}
+                                            <li><a href="#{{reference.title | replace(' ', '-') | lower }}">{{reference.title}}</a>
+                                                {% if reference.api_details %}
+                                                <ul>
+                                                    {% for sub_item in reference.api_details %}
+                                                    {% set i = loop.index %}
+                                                    <li class="{% if i > 3 %}check-visibility{% endif %}"><a href="#{{sub_item.title | replace(' ', '-') | lower }}">{{sub_item.title}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- sidebar section end here -->
+
+                        <div class="col-md-9 content-area">
+                            <div class="col-md-8">
+                                <h1>Content Delivery API</h1>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 id="{{entry.introduction.heading | replace(' ', '-') | lower}}">{{entry.introduction.heading}}</h2>
+                                        {% for introduction in entry.introduction.order_of_sub_items %}
+                                        <div class="article">
+                                            <h3 id="{{introduction.title | replace(' ', '-') | lower}}">{{introduction.title}}</h3>
+                                            <p>{{introduction.description}}</p>
+                                            {% if introduction.sub_items %}
+                                            {% for sub_item in introduction.sub_items %}
+                                            <div>
+                                                <h4 id="{{sub_item.title | replace(' ', '-') | lower}}">{{sub_item.title}}</h4>
+                                                <p>{{sub_item.description}}</p>
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 id="{{entry.reference.heading  | replace(' ', '-') | lower }}">{{entry.reference.heading}}</h2>
+                                        {% for reference in entry.reference.order_of_sub_items %}
+                                        <div class="article">
+                                            <h3 id="{{reference.title  | replace(' ', '-') | lower}}">{{reference.title}}</h3>
+                                            <p>{{reference.description}}</p>
+                                            {% if reference.api_details %}
+
+                                            {% for sub_item in reference.api_details %}
+
+                                            <h4 id="{{sub_item.title | replace(' ', '-') | lower }}">{{sub_item.title}}</h4>
+                                            <p>{{sub_item.description}}</p>
+                                            {% if sub_item.api_requests_collection %}
+                                            {% for api_requests_collection in sub_item.api_requests_collection %}
+                                            {% for api_request in api_requests_collection.api_request %}
+                                            <a  href="#{{api_request.title | replace(' ', '-') | lower }}" class="actionName" mainTitle="{{reference.title}}" subTitle="{{sub_item.title}}" entryTitle ="{{api_request.title}}" entryUid="{{api_request.uid}}" >{{api_request.title}}</a>
+                                            {% endfor %}
+                                            <p>{{api_requests_collection.summary}}</p>
+                                             {% endfor %}
+                                             {% endif %}
+
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="sideColumExampleConsole scrollbar">
+                    <div id="documentationColum">
+                        <!--console part using react component-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
