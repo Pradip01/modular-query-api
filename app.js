@@ -23,11 +23,14 @@ try {
 
   // load globals
   global['config'] = _env;
-  global['Stack'] = Contentstack.Stack({
+  var stack = Contentstack.Stack({
     api_key: config.contentstack.api_key ,
     access_token: config.contentstack.access_token,
     environment: config.contentstack.environment
   });
+
+  stack.setHost('dev1-new-api.contentstack.io');
+  global['Stack'] = stack;
 
   // load port
   var PORT = process.env.PORT || 5000;

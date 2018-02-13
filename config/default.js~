@@ -13,8 +13,8 @@ module.exports = exports = {
     host:'https://dev1-new-api.contentstack.io/v3',
 
     Stack:Contentstack.Stack({
-        api_key: "blt4fed6422faf009a3" ,
-        access_token: "blt2b0839c1fd28eedc",
+        api_key: "blt6e9197f9dd23eba6" ,
+        access_token: "blt2c705ff87a875091",
         environment: "dev"
     })
 };
